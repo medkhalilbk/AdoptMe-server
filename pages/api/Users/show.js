@@ -18,6 +18,7 @@ export default async function ShowUsers(req, res) {
       await connectMongo();
       console.log('CONNECTED TO MONGO');
       console.log('LOADING USERS');
+      console.log(process.env.API_ROUTE_SECRET)
       const user = await User.find();
       res.json({ user });
     } catch (error) {
