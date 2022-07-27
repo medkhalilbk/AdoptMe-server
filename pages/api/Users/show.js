@@ -10,6 +10,8 @@ export default async function ShowUsers(req, res) {
 
   if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
     return res.status(401).send("You are not autorized !");
+
+    console.log(process.env.API_ROUTE_SECRET)
   }
   else {
 
@@ -27,5 +29,4 @@ export default async function ShowUsers(req, res) {
   }
   // 
 
-  console.log(process.env.API_ROUTE_SECRET)
 }
