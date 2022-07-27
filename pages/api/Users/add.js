@@ -6,7 +6,10 @@ import User from '../../../utils/userModel';
  * @param {import('next').NextApiResponse} res
  */
 export default async function addTest(req, res) {
-    if (req.method === 'POST') {
+    if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
+        return res.status(401).send("You are not autorized !");
+    }
+    else {
         try {
             console.log('CONNECTING TO MONGO');
             await connectMongo();
@@ -14,13 +17,12 @@ export default async function addTest(req, res) {
             console.log('CREATING DOCUMENT');
             const user = await User.create(req.body);
             console.log('CREATED DOCUMENT');
-
             res.json({ user });
         } catch (error) {
             console.log(error);
             res.json({ error });
         }
-    } else {
-        res.status(403)
     }
+
+
 }

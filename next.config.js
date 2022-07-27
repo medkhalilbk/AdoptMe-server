@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    API_ROUTE_SECRET: process.env.API_ROUTE_SECRET
+  }
 }
 
 module.exports = nextConfig

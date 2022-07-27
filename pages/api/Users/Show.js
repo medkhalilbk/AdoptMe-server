@@ -7,15 +7,24 @@ import User from '../../../utils/userModel';
  */
 
 export default async function ShowUsers(req, res) {
-  try {
-    console.log('CONNECTING TO MONGO');
-    await connectMongo();
-    console.log('CONNECTED TO MONGO');
-    console.log('LOADING USERS');
-    const user = await User.find();
-    res.json({ user });
-  } catch (error) {
-    console.log(error);
-    res.json({ error });
+
+  if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
+    return res.status(401).send("You are not autorized !");
   }
+  else {
+
+    try {
+      console.log('CONNECTING TO MONGO');
+      await connectMongo();
+      console.log('CONNECTED TO MONGO');
+      console.log('LOADING USERS');
+      const user = await User.find();
+      res.json({ user });
+    } catch (error) {
+      console.log(error);
+      res.json({ error });
+    }
+  }
+  // 
+
 }
