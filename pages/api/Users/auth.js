@@ -15,11 +15,21 @@ export default async function check(req, res) {
             await connectMongo();
             console.log('CONNECTED TO MONGO');
             console.log('CREATING DOCUMENT');
-            let email = req.query.email;
-            let password = req.query.password;
-            //  const user = await User.find({}); 
-            res.send("email : " + email + " Password" + password)
 
+            var md5 = require("md5");
+            const email = req.body.email;
+            const password = req.body.password;
+            const hashedPass = md5(password);
+
+            User.find({ email: email, password: hashedPass }).exec(function (err, users) {
+                if (users.length) {
+                    res.json({ id: users[0].id })
+                    res.status(200)
+                } else {
+                    res.status(500)
+                    res.json({ id: null })
+                }
+            })
         } catch (error) {
             console.log(error);
             res.json({ error });

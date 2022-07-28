@@ -15,12 +15,17 @@ export default async function addTest(req, res) {
             await connectMongo();
             console.log('CONNECTED TO MONGO');
             console.log('CREATING DOCUMENT');
+            var md5 = require("md5");
+
+            const final_user = req.body;
+            const password = final_user.password;
+            final_user.password = md5(req.body.password);
             const user = await User.create(req.body);
             console.log('CREATED DOCUMENT');
-            res.json({ user });
+            res.json(final_user);
         } catch (error) {
             console.log(error);
-            res.json({ error });
+            res.json(final_user);
         }
     }
 
