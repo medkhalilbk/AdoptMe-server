@@ -6,7 +6,7 @@ import Ad from "../../../utils/adModel";
  * @param {import('next').NextApiResponse} res
  */
 
-export default async function ShowUsers(req, res) {
+export default async function ShowAds(req, res) {
 
     if (req.query.API_ROUTE_SECRET !== process.env.API_ROUTE_SECRET) {
         return res.status(401).send("You are not autorized !");
