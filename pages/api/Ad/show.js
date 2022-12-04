@@ -1,6 +1,6 @@
 import connectMongo from '../../../utils/connectMongoDB';
 import Ad from "../../../utils/adModel";
-
+import mongoose from "mongoose";
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
@@ -14,11 +14,14 @@ export default async function ShowAds(req, res) {
     else {
         try {
             console.log('CONNECTING TO MONGO');
-            await connectMongo();
-            console.log('CONNECTED TO MONGO');
-            console.log('LOADING USERS');
-            const Ad = await Ad.find();
-            res.json({ Ad });
+            mongoose.connect('mongodb+srv://khalil:nUhi3qyilDygDhz9@adoptme.igxn7.mongodb.net/?retryWrites=true&w=majority').then(() => {
+                const db = mongoose.connection.db ;
+                db.collection('Ad').find().toArray((err, result) => {
+
+                    res.json({ result });
+                }) ;
+            })
+            console.log('LOADING Ads');
         } catch (error) {
             console.log(error);
             res.json({ error });
