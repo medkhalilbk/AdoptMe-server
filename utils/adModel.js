@@ -13,5 +13,5 @@ const adModel = new Schema({
     owner:Object
 });
 
-const Ad = models.Ad || model('User', adModel);
+const Ad = models.Ad || model('Ad', adModel);
 export default Ad;

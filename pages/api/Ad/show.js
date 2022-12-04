@@ -12,7 +12,6 @@ export default async function ShowAds(req, res) {
         return res.status(401).send("You are not autorized !");
     }
     else {
-
         try {
             console.log('CONNECTING TO MONGO');
             await connectMongo();
