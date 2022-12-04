@@ -28,7 +28,6 @@ export default async function check(req, res) {
                 } else {
                     res.status(500)
                     res.json({ id: null })
-                    // Email already exist
                 }
             })
         } catch (error) {
