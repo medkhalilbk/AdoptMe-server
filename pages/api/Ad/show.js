@@ -17,8 +17,8 @@ export default async function ShowAds(req, res) {
             await connectMongo();
             console.log('CONNECTED TO MONGO');
             console.log('LOADING USERS');
-            const ads = await Ad.find();
-            res.json({ ads });
+            const Ad = await Ad.find();
+            res.json({ Ad });
         } catch (error) {
             console.log(error);
             res.json({ error });
