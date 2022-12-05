@@ -13,12 +13,15 @@ export default async function ShowAds(req, res) {
     }
     else {
         try {
+
             console.log('CONNECTING TO MONGO');
             mongoose.connect('mongodb+srv://khalil:nUhi3qyilDygDhz9@adoptme.igxn7.mongodb.net/?retryWrites=true&w=majority').then(() => {
+
                 const db = mongoose.connection.db ;
                 db.collection('Ad').find().toArray((err, result) => {
+                  
+                        res.json({ result })
 
-                    res.json({ result });
                 }) ;
             })
             console.log('LOADING Ads');
