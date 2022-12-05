@@ -20,9 +20,9 @@ export default async function ShowAds(req, res) {
                     let idByReq = req.body.id
                     const db = mongoose.connection.db ;
                     let ObjectIdReq = new mongoose.mongo.ObjectId(idByReq);
-                    db.collection('Ad').find(ObjectIdReq).toArray((err, result) => {
+                    db.collection('Ad').find(ObjectIdReq).toArray((err, Ad) => {
 
-                        res.json({ result })
+                        res.json({ Ad })
 
                     }) ;
                 })
