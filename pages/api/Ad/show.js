@@ -15,7 +15,15 @@ export default async function ShowAds(req, res) {
         try {
 
             console.log('CONNECTING TO MONGO');
-             Ad.find().toArray().then((response) => { console.log(response)})
+            mongoose.connect('mongodb+srv://khalil:nUhi3qyilDygDhz9@adoptme.igxn7.mongodb.net/?retryWrites=true&w=majority').then(() => {
+
+                const db = mongoose.connection.db ;
+                db.collection('Ad').find().toArray((err, result) => {
+
+                        res.json({ result })
+
+                }) ;
+            })
             console.log('LOADING Ads');
         } catch (error) {
             console.log(error);
